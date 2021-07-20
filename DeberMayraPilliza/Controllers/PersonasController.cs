@@ -16,9 +16,9 @@ namespace DeberMayraPilliza.Controllers
         public ActionResult Index()
         {
             List<Persona> lisper = new List<Persona>();
-            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("ListaPersona")))
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("ListaPersona")))
             {
-               
+
                 Persona per = new Persona();
                 per.Cedula = " 1722539150";
                 per.Nombre = "Mayra ";
@@ -32,7 +32,8 @@ namespace DeberMayraPilliza.Controllers
             }
             else
             {
-               lisper= JsonConvert.DeserializeObject<List<Persona>>(HttpContext.Session.GetString("ListaPersona"));
+
+                lisper = JsonConvert.DeserializeObject<List<Persona>>(HttpContext.Session.GetString("ListaPersona"));
             }
 
             HttpContext.Session.SetString("ListaPersona", JsonConvert.SerializeObject(lisper));
